@@ -7,7 +7,9 @@
 </head>
 <body>
 
-<h1>IDK The Demo for gps trakcer that predicts ur mode of transport i guess</h1>
+<h1> The Demo for gps trakcer that predicts ur mode of transport i guess</h1>
+<h2>By <bold> Leo!</bold></h2>
+<p>All this does is record Your GPS locations and speed both given by gps then tell what your doing and then calculate journeyd and the n later predict the carbon footprint from them</p>
 
 <h2 id="activity">Move to start</h2>
 <h2 id="speed">0 km/h</h2>
@@ -65,10 +67,10 @@ function startTracking() {
             ", " + position.coords.longitude.toFixed(5);
 
         let detected = "";
-
-        if (average < 2) {
+        // all of theese are the set speeds to detect what ur doing change them if you want to change the thresholds if u find them unaccurite the might be hard for it to differencste the plane and the train as they lowkee go the same speed most the time
+        if (average < 0.8) {
             detected = "Standing still";
-        } else if (average < 8) {
+        } else if (average < 9) {
             detected = "Walking";
         } else if (average < 18) {
             detected = "Running";
@@ -79,6 +81,7 @@ function startTracking() {
         } else {
             detected = "Plane";
         }
+
         if (detected === possibleActivity) {
             activityCount++;
         } else {
@@ -86,7 +89,10 @@ function startTracking() {
             activityCount = 1;
         }
 
-        if (activityCount >= 3) {
+        // so if ur walking and slow down it aint think ur standing anymiore
+        if (detected === "Standing still" && activityCount >= 6) {
+            currentActivity = detected;
+        } else if (detected !== "Standing still" && activityCount >= 3) {
             currentActivity = detected;
         }
 
@@ -133,7 +139,7 @@ function stopTracking() {
 
     currentActivity = "Not tracking";
     speeds = [];
-
+// i wanted rto make it look nice theese icons i think we should use for whole site they r from fontawsome and have a ncie style to them
     document.getElementById("activity").innerHTML = "Not tracking";
     document.getElementById("speed").innerHTML = "0 km/h";
 }
