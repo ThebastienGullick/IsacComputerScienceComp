@@ -1,5 +1,4 @@
 <h1>The Internet Of Everything Entry</h1>
-<br> 
 <br>
 <div class="header">
   <h2>Our Project</h2>
