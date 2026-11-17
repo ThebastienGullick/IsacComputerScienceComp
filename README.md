@@ -36,3 +36,12 @@
   <li>Shows the average CO2 emissions per person so you can compare</li>
 </ul>
 </div>
+<div class="Navigator">
+  <h2>Navigator</h2>
+  <ul>
+  <li>Go to demos then all our demos are in there!</li>
+  <li>go to design&research to look out our sketches and references of data for this project</li>
+  <li>press projects then todo to see the todo list of tasks( also above)</li>
+  <li>go to discussions if you want to say something or just use the WhatsApp channel</li>
+</ul>
+</div>
