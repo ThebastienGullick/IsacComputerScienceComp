@@ -1,7 +1,7 @@
 
 <div class="header">
   <h1>Our Project</h1>
-  <p>By Leo Adam Idris and anthatha</p>
+  <p>By Leo Adam Idris and atharva</p>
 </div>
 
 <div class="content">
