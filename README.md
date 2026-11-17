@@ -13,8 +13,8 @@
 </div>
 <div class="domains">
   <h2>Domains</h2>
-  <p>yeahyouknow.vercel.app</p>
-  <p>Its a demo</p>
+  <p><bold>yeahyouknow.vercel.app</bold> demo for detecting veichale</p>
+  
 </div>
 <div class="logs">
   <h2>Logs</h2>
