@@ -12,5 +12,5 @@
 <div class="plan">
   <h1>Domains</h1>
   <p>yeahyouknow.vercel.app</p>
-
+  <p>Its a demo</p>
 </div>
