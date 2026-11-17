@@ -12,8 +12,8 @@
 </div>
 <div class="roles">
   <h2>Roles</h2>
- <p><strong>Developers</strong>Adam, Leo, Arharva</p>
-  <p><strong>Video editors and presenters</strong> Idris, Leo, Adam ,Atharva</p>
+ <p><strong>Developers: </strong>Adam, Leo, Athava</p>
+  <p><strong>Video editors and presenters:</strong> Idris, Leo, Adam ,Atharva</p>
 </div>
 <div class="domains">
   <h2>Domains</h2>
