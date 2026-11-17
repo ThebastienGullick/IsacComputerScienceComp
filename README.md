@@ -23,7 +23,7 @@
   </ul>
 </div>
 <div class="to do next">
-  <h2>Logs</h2>
+  <h2>things to do</h2>
   <ul>
   <li>add a button to see how to reduce co2 emitions.</li>
 </ul>
