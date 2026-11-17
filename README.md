@@ -18,6 +18,7 @@
 <div class="domains">
   <h2>Domains</h2>
   <p><strong>yeahyouknow.vercel.app</strong> demo for detecting veichale</p>
+  <p><strong>iseehowitis.vercel.app</strong> demo for detecting journeys</p>
   
 </div>
 <div class="logs">
