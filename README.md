@@ -1,4 +1,6 @@
-<h1>The Internet Of Everything</h1>
+<h1>The Internet Of Everything Entry</h1>
+<br> 
+<br>
 <div class="header">
   <h2>Our Project</h2>
   <p>By Leo Adam Idris and atharva</p>
