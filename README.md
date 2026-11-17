@@ -20,6 +20,11 @@
   <ul>
   <li>16/11/2026 <strong>Leo</strong> demo where it can detect what vehicle your in and start to detect journeys.</li>
   <li>17/11/2026 <strong>Adam</strong> fixed my spelling mistakes</li>
-  <li>17/11/2026 <strong>Adam</strong> I want to have a button which can direct you to another file that can show the user what they can do to reduce carbon footprint</li>
   </ul>
+</div>
+<div class="to do next">
+  <h2>Logs</h2>
+  <ul>
+  <li>add a button to see how to reduce co2 emitions.</li>
+</ul>
 </div>
