@@ -12,13 +12,13 @@
 </div>
 <div class="domains">
   <h2>Domains</h2>
-  <p><bold>yeahyouknow.vercel.app</bold> demo for detecting veichale</p>
+  <p><strong>yeahyouknow.vercel.app</strong> demo for detecting veichale</p>
   
 </div>
 <div class="logs">
   <h2>Logs</h2>
   <ul>
   <li>16/11/2026 <strong>Leo</strong> demo where it can detect what vehicle your in and start to detect journeys.</li>
-  <li>17/11/2026<strong>adam</strong> fixed my spelling mistakes</li>
+  <li>17/11/2026 <strong>Adam</strong> fixed my spelling mistakes</li>
   </ul>
 </div>
