@@ -26,5 +26,6 @@
   <h2>things to do</h2>
   <ul>
   <li>add a button to see how to reduce co2 emitions.</li>
+  <li>add a bar that turns green yellow red baced on your co2 emotions an dfills up the hifgher it is</li>
 </ul>
 </div>
