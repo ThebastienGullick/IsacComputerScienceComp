@@ -1,21 +1,21 @@
-
+<h1>The Internet Of Everything</h1>
 <div class="header">
-  <h1>Our Project</h1>
+  <h2>Our Project</h2>
   <p>By Leo Adam Idris and atharva</p>
 </div>
 
 <div class="plan">
-  <h1>Our Plan</h1>
+  <h2>Our Plan</h2>
   <p>Make a carbon footprint tracker that then tells you how to equalise and lower your footprint.</p>
   <p>will be able to tell when u  driving and calculate the co2 output from it or train or plane by speed.</p>
 </div>
 <div class="domains">
-  <h1>Domains</h1>
+  <h2>Domains</h2>
   <p>yeahyouknow.vercel.app</p>
   <p>Its a demo</p>
 </div>
 <div class="logs">
-  <h1>Logs</h1>
+  <h2>Logs</h2>
   <ul>
   <li>16/11/2026 made demo where it can detect what vehicle your in and start to detect journeys.</li>
   <li>17/11/2026 adam fixed my spelling mistakes</li>
