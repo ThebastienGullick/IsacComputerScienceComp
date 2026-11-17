@@ -18,7 +18,7 @@
 <div class="logs">
   <h2>Logs</h2>
   <ul>
-  <li>16/11/2026 made demo where it can detect what vehicle your in and start to detect journeys.</li>
-  <li>17/11/2026 adam fixed my spelling mistakes</li>
+  <li>16/11/2026 <strong>Leo</strong> demo where it can detect what vehicle your in and start to detect journeys.</li>
+  <li>17/11/2026<strong>adam</strong> fixed my spelling mistakes</li>
   </ul>
 </div>
