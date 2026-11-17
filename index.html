@@ -1,1 +1,148 @@
 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>A Movement Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+<h1> The Demo for gps trakcer that predicts ur mode of transport i guess</h1>
+<h2>By <bold> Leo!</bold></h2>
+<p>All this does is record Your GPS locations and speed both given by gps then tell what your doing and then calculate journeyd and the n later predict the carbon footprint from them</p>
+<br>
+<h2 id="activity">Move to start</h2>
+<h2 id="speed">0 km/h</h2>
+
+<p id="location">Location: Untracked rn</p>
+
+<button onclick="startTracking()">Start</button>
+<button onclick="stopTracking()">Stop</button>
+
+<script>
+
+let watchID;
+let speeds = [];
+let currentActivity = "Not tracking";
+let possibleActivity = "";
+let activityCount = 0;
+
+function startTracking() {
+
+    speeds = [];
+    currentActivity = "";
+    possibleActivity = "";
+    activityCount = 0;
+
+    watchID = navigator.geolocation.watchPosition(function(position) {
+
+        let speed = position.coords.speed;
+
+        if (speed === null) {
+            return;
+        }
+
+        let kmh = speed * 3.6;
+
+        // for bad gps readings
+        if (position.coords.accuracy > 40) {
+            return;
+        }
+
+        // store resding
+        speeds.push(kmh);
+
+        if (speeds.length > 5) {
+            speeds.shift();
+        }
+
+        // Calculate  speed that u are traviling at
+        let average = speeds.reduce((a, b) => a + b, 0) / speeds.length;
+
+        document.getElementById("speed").innerHTML =
+            average.toFixed(1) + " km/h";
+
+        document.getElementById("location").innerHTML =
+            "Location: " + position.coords.latitude.toFixed(5) +
+            ", " + position.coords.longitude.toFixed(5);
+
+        let detected = "";
+        // all of theese are the set speeds to detect what ur doing change them if you want to change the thresholds if u find them unaccurite the might be hard for it to differencste the plane and the train as they lowkee go the same speed most the time
+        if (average < 0.8) {
+            detected = "Standing still";
+        } else if (average < 9) {
+            detected = "Walking";
+        } else if (average < 18) {
+            detected = "Running";
+        } else if (average < 110) {
+            detected = "Driving";
+        } else if (average < 250) {
+            detected = "Train";
+        } else {
+            detected = "Plane";
+        }
+
+        if (detected === possibleActivity) {
+            activityCount++;
+        } else {
+            possibleActivity = detected;
+            activityCount = 1;
+        }
+
+        // so if ur walking and slow down it aint think ur standing anymiore
+        if (detected === "Standing still" && activityCount >= 6) {
+            currentActivity = detected;
+        } else if (detected !== "Standing still" && activityCount >= 3) {
+            currentActivity = detected;
+        }
+
+        showActivity(currentActivity);
+
+    }, function(error) {
+        alert(error.message);
+    }, {
+        enableHighAccuracy: true,
+        maximumAge: 1000,
+        timeout: 15000
+    });
+
+}
+
+function showActivity(activity) {
+
+    let html = activity;
+
+    if (activity === "Walking" || activity === "Running") {
+        html += ' <i class="fa-solid fa-person-walking" style="color: green;"></i>';
+    }
+
+    if (activity === "Driving") {
+        html += ' <i class="fa-solid fa-car" style="color: red;"></i>';
+    }
+
+    if (activity === "Train") {
+        html += ' <i class="fa-solid fa-train" style="color: red;"></i>';
+    }
+
+    if (activity === "Plane") {
+        html += ' <i class="fa-solid fa-plane" style="color: red;"></i>';
+    }
+
+    document.getElementById("activity").innerHTML = html;
+}
+
+function stopTracking() {
+
+    if (watchID !== undefined) {
+        navigator.geolocation.clearWatch(watchID);
+    }
+
+    currentActivity = "Not tracking";
+    speeds = [];
+// i wanted rto make it look nice theese icons i think we should use for whole site they r from fontawsome and have a ncie style to them
+    document.getElementById("activity").innerHTML = "Not tracking";
+    document.getElementById("speed").innerHTML = "0 km/h";
+}
+</script>
+</body>
+</html>
