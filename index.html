@@ -1,1 +1,436 @@
-<!-- Where code for final site will go--> 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>C02 Emission Tracker Demo for JOurney Reconnising</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: white;
+            margin: 20px;
+        }
+
+        button, select {
+            padding: 10px;
+            margin-top: 5px;
+        }
+
+        button {
+            border-radius: 20px;
+            padding: 10px 25px;
+            cursor: pointer;
+        }
+
+        .journey {
+            border: 1px solid #ccc;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 8px;
+        }
+
+        hr {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>InControl</h1>
+    <h2>Journey Tracker</h2>
+
+    <!-- Section 1 Tracking  -->
+  
+
+    <p>
+        We use will use GPS to detect your speed , distance traveled and the legnth of your journey and use this data to hlep us predict your carbon emissions!!!
+      <br> 
+      This is a demo for that!
+    </p>
+
+    <!-- pick mode of transport so adams calculations are easier and its more accruite we can add different types of card lsater -->
+    <p>Choose your mode of transport you will be taking:</p>
+
+    <select id="transport">
+        <option value="Car">Car</option>
+        <option value="Train">Train</option>
+        <option value="Plane">Plane</option>
+    </select>
+
+    <br><br>
+
+    <!-- to turn on the gps tracking -->
+    <button id="trackButton" onclick="toggleTracking()">Start</button>
+
+    <hr>
+    <h3>
+        <i class="fa-solid fa-location-dot" style="color: rgb(212, 23, 38);"></i>
+        Tracking
+    </h3>
+
+    <!-- this here will be the current gps data we r getting -->
+    <h3>Current Location</h3>
+    <p id="location">Not tracking</p>
+
+    <h3>Current Activity</h3>
+    <p id="activity">Not tracking</p>
+
+    <h3>Current Speed</h3>
+    <p id="speed">0 km/h</p>
+
+    <hr>
+
+    <!-- current journey imformation if there is one -->
+    <h3>
+        <i class="fa-solid fa-route" style="color: rgb(116, 192, 252);"></i>
+        Current Journey
+    </h3>
+
+    <p>Distance: <span id="distance">0 km</span></p>
+    <p>Duration: <span id="duration">0 minutes</span></p>
+    <p>Average speed: <span id="averageSpeed">0 km/h</span></p>
+    <p>Maximum speed: <span id="maxSpeed">0 km/h</span></p>
+
+    <hr>
+
+    <!-- for the past journeys -->
+    <h2><i class="fa-solid fa-route" style="color: rgb(116, 192, 252);"></i>Past Journeys</h2>
+    <div id="pastJourneys"></div>
+    
+
+
+    <script>
+
+        // where we set the varibles used
+        let watchID;
+        let journeys = JSON.parse(localStorage.getItem("journeys")) || [];
+
+        let journey = null;
+        let movingCount = 0;
+        let stoppedCount = 0;
+
+
+        // fancy cool stop and start button
+        function toggleTracking() {
+
+            let button = document.getElementById("trackButton");
+
+            if (watchID === undefined) {
+                startTracking();
+            } else {
+                stopTracking();
+            }
+
+        }
+
+
+        // gps tracking 
+        function startTracking() {
+
+            if (!navigator.geolocation) {
+                alert("GPS is not supported by your browser.");
+                return;
+            }
+
+            if (watchID !== undefined) {
+                return;
+            }
+
+            movingCount = 0;
+            stoppedCount = 0;
+
+            document.getElementById("trackButton").innerHTML = "Stop";
+
+            watchID = navigator.geolocation.watchPosition(function(position) {
+
+                let lat = position.coords.latitude;
+                let lon = position.coords.longitude;
+                let gpsSpeed = position.coords.speed;
+
+                // bad readings (can completly mess up jounreys if not managed)
+                if (position.coords.accuracy > 40) {
+                    return;
+                }
+
+                //turns the unit to km an hour insteads of metres
+                if (gpsSpeed === null) {
+                    return;
+                }
+
+                let kmh = gpsSpeed * 3.6;
+
+                document.getElementById("location").innerHTML =
+                    "Latitude: " + lat.toFixed(5) +
+                    "<br>Longitude: " + lon.toFixed(5);
+
+                document.getElementById("speed").innerHTML =
+                    kmh.toFixed(1) + " km/h";
+
+                // if they r still or standing still
+                if (kmh > 5) {
+
+                    document.getElementById("activity").innerHTML = "Travelling";
+
+                    movingCount++;
+                    stoppedCount = 0;
+
+                    // start the journey after 3 moving readings ( just to be sure
+                    if (movingCount >= 3 && journey === null) {
+                        startJourney(lat, lon);
+                    }
+
+                } else {
+
+                    document.getElementById("activity").innerHTML = "Stationary";
+
+                    stoppedCount++;
+                    movingCount = 0;
+
+                    // ends the journey after 6 still readings hopefully this removes the problem with traffic 
+                    if (stoppedCount >= 6 && journey !== null) {
+                        finishJourney(lat, lon);
+                    }
+
+                }
+                if (journey !== null) {
+                    addJourneyReading(lat, lon, kmh);
+                }
+
+            }, function(error) {
+
+                alert("turn gps perrmissions on.");
+
+            }, {
+                enableHighAccuracy: true,
+                maximumAge: 0
+            });
+
+        }
+
+
+        // records a new journeyy 
+        function startJourney(lat, lon) {
+
+            journey = {
+                transport: document.getElementById("transport").value,
+                startTime: new Date(),
+                startLocation: lat.toFixed(5) + ", " + lon.toFixed(5),
+                endLocation: "",
+                distance: 0,
+                speeds: [],
+                startLat: lat,
+                startLon: lon,
+                lastLat: lat,
+                lastLon: lon
+            };
+
+            updateJourney();
+
+        }
+
+
+        // this the calculates distance
+        function getDistance(lat1, lon1, lat2, lon2) {
+
+            let R = 6371;
+
+            let dLat = (lat2 - lat1) * Math.PI / 180;
+            let dLon = (lon2 - lon1) * Math.PI / 180;
+
+            let a =
+                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(lat1 * Math.PI / 180) *
+                Math.cos(lat2 * Math.PI / 180) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+
+            let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+            return R * c;
+
+        }
+
+        function addJourneyReading(lat, lon, kmh) {
+
+            let extraDistance = getDistance(
+                journey.lastLat,
+                journey.lastLon,
+                lat,
+                lon
+            );
+            if (extraDistance > 0.005) {
+                journey.distance = journey.distance + extraDistance;
+            }
+
+            journey.speeds.push(kmh);
+
+            journey.lastLat = lat;
+            journey.lastLon = lon;
+
+            updateJourney();
+
+        }
+        function updateJourney() {
+
+            if (journey === null) {
+                return;
+            }
+
+            let totalSpeed = 0;
+            let maximumSpeed = 0;
+  //find highest speed
+            for (let i = 0; i < journey.speeds.length; i++) {
+
+                totalSpeed = totalSpeed + journey.speeds[i];
+
+                if (journey.speeds[i] > maximumSpeed) {
+                    maximumSpeed = journey.speeds[i];
+                }
+
+            }
+
+            let average = 0;
+
+            if (journey.speeds.length > 0) {
+                average = totalSpeed / journey.speeds.length;
+            }
+
+            // journey length is figured out here 
+            let timePassed = (new Date() - journey.startTime) / 60000;
+
+            document.getElementById("distance").innerHTML =
+                journey.distance.toFixed(2) + " km";
+
+            document.getElementById("duration").innerHTML =
+                timePassed.toFixed(1) + " minutes";
+
+            document.getElementById("averageSpeed").innerHTML =
+                average.toFixed(1) + " km/h";
+
+            document.getElementById("maxSpeed").innerHTML =
+                maximumSpeed.toFixed(1) + " km/h";
+
+        }
+
+// ending an dsaving journey
+        function finishJourney(lat, lon) {
+
+            if (journey === null) {
+                return;
+            }
+
+            journey.endTime = new Date();
+            journey.endLocation = lat.toFixed(5) + ", " + lon.toFixed(5);
+
+            journeys.push(journey);
+
+            localStorage.setItem("journeys", JSON.stringify(journeys));
+
+            journey = null;
+            document.getElementById("distance").innerHTML = "0 km";
+            document.getElementById("duration").innerHTML = "0 minutes";
+            document.getElementById("averageSpeed").innerHTML = "0 km/h";
+            document.getElementById("maxSpeed").innerHTML = "0 km/h";
+
+            showPastJourneys();
+
+        }
+
+        function stopTracking() {
+
+            if (watchID !== undefined) {
+                navigator.geolocation.clearWatch(watchID);
+                watchID = undefined;
+            }
+
+            if (journey !== null) {
+                finishJourney(journey.lastLat, journey.lastLon);
+            }
+
+            document.getElementById("trackButton").innerHTML = "Start";
+            document.getElementById("activity").innerHTML = "Not tracking";
+            document.getElementById("speed").innerHTML = "0 km/h";
+            document.getElementById("location").innerHTML = "Not tracking";
+
+            movingCount = 0;
+            stoppedCount = 0;
+
+        }
+
+        function showPastJourneys() {
+
+            let output = "";
+
+            if (journeys.length === 0) {
+                document.getElementById("pastJourneys").innerHTML =
+                    "No journeys recorded yet.";
+                return;
+            }
+
+            for (let i = 0; i < journeys.length; i++) {
+
+                let j = journeys[i];
+
+                let totalSpeed = 0;
+                let maximumSpeed = 0;
+
+                for (let x = 0; x < j.speeds.length; x++) {
+
+                    totalSpeed = totalSpeed + j.speeds[x];
+
+                    if (j.speeds[x] > maximumSpeed) {
+                        maximumSpeed = j.speeds[x];
+                    }
+
+                }
+
+                let average = 0;
+
+                if (j.speeds.length > 0) {
+                    average = totalSpeed / j.speeds.length;
+                }
+
+                let duration = 0;
+
+                if (j.endTime) {
+                    duration = (new Date(j.endTime) - new Date(j.startTime)) / 60000;
+                }
+
+                let transportIcon = "";
+
+                if (j.transport === "Car") {
+                    transportIcon = '<i class="fa-solid fa-car"></i>';
+                } else if (j.transport === "Train") {
+                    transportIcon = '<i class="fa-solid fa-train"></i>';
+                } else if (j.transport === "Plane") {
+                    transportIcon = '<i class="fa-solid fa-plane"></i>';
+                }
+
+                output = output +
+                    '<div class="journey">' +
+                    '<h3>' + transportIcon + ' ' + j.transport + ' Journey</h3>' +
+                    '<p>Date: ' + new Date(j.startTime).toLocaleString() + '</p>' +
+                    '<p>Distance: ' + j.distance.toFixed(2) + ' km</p>' +
+                    '<p>Duration: ' + duration.toFixed(1) + ' minutes</p>' +
+                    '<p>Average speed: ' + average.toFixed(1) + ' km/h</p>' +
+                    '<p>Maximum speed: ' + maximumSpeed.toFixed(1) + ' km/h</p>' +
+                    '<p>From: ' + j.startLocation + '</p>' +
+                    '<p>To: ' + j.endLocation + '</p>' +
+                    '</div>';
+
+            }
+
+            document.getElementById("pastJourneys").innerHTML = output;
+
+        }
+        showPastJourneys();
+
+    </script>
+
+</body>
+</html>
