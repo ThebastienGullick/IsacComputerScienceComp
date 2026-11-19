@@ -28,6 +28,8 @@
   <ul>
   <li>16/11/2026 <strong>Leo</strong> demo where it can detect what vehicle your in and start to detect journeys.</li>
   <li>17/11/2026 <strong>Adam</strong> fixed my spelling mistakes</li>
+  <li>17/11/2026 <strong>Leo</strong> started demos for  recognizing and tracking journeys.</li>
+  <li>19/11/2026 <strong>Leo</strong>Finally finished the demo for reccognising and tracking journeys</li>
   </ul>
 </div>
 <div class="to do next">
