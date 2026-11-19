@@ -2,7 +2,8 @@
 <br>
 <div class="header">
   <h2>Our Project</h2>
-  <p>By Leo Adam Idris and Atharva</p>
+  <p>By Leo Adam Atharva</p>
+  <p>And Idris</p>
 </div>
 
 <div class="plan">
