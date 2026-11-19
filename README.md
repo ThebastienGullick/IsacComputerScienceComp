@@ -18,6 +18,7 @@
 </div>
 <div class="domains">
   <h2>Domains</h2>
+  <p><strong>https://co2nutriliseridkcarthing.vercel.app/</strong> MAIN DOMAIN</p>
   <p><strong>https://yeahyouknow.vercel.app</strong> demo for detecting veichale</p>
   <p><strong>https://journeytracker.oneapp.dev/</strong> demo for detecting journeys</p>
   
