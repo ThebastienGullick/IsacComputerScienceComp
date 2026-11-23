@@ -295,3 +295,6 @@ if answer == 1:
 print("Your Carbon Emissions for your cars are", totC02carnocar, "kgCO2e")
 print("Your total Carbon Emissions for your public transport are", totC02pt, "kgCO2e")
 print("Your total Carbon Emissions for your plane rides are", totC02planes, "kgCO2e")
+
+totaltoday = totC02planes + totC02pt + totC02carnocar
+print("Your total Carbon Emissions today are", totaltoday)
