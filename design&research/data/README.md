@@ -1,2 +1,3 @@
 <h1>Data</h1>
-<p>Idk what to put here</p>
+<p>This is where we can store information about the general plan and ideas that we want to commit to this project
+- Idris Hamilton</p>
