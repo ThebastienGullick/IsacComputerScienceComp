@@ -50,5 +50,7 @@
   <li>go to design&research to look out our sketches and references of data for this project</li>
   <li>press projects then todo to see the todo list of tasks( also above)</li>
   <li>go to discussions if you want to say something or just use the WhatsApp channel</li>
+
+  <li>Leave Adam to do the calculations, but I am not doing that 1000 line data base thingy</li>
 </ul>
 </div>
