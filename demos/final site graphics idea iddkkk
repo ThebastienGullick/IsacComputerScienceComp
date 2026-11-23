@@ -9,8 +9,8 @@
 <body>
     <h1 class="title">Carbon emission tracker</h1>
     <p>
-        This Site Shows your estimated CO₂ emissions today and then helps you become carbon neutral!
-        We do this through tracking car journeys and predicting emissions. Enjoy our site.
+        This site shows your estimated carbon dioxide (CO₂) emissions today and then helps you become carbon neutral!
+        We do this through tracking car journeys and predicting emissions. Enjoy our site!
     </p>
    <br>
    <h2>Your emissions today:</h2>
@@ -25,5 +25,5 @@
     
 </body>
 <hr>
-<P> this is jsut a dmeo with no functions</p>
+<P> this is jsut a demo with no functions</p>
 </html>
