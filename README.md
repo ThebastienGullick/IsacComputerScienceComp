@@ -34,6 +34,7 @@
   <li>19/11/2026 <strong>Leo</strong>Finally finished the demo for reccognising and tracking journeys</li>
   <li>24 November Idris fixed a bunch of mistakes</li>
   <li>24/11/26 <strong>Adam</strong> uploaded the python code to the calculation demo. Might need fixing</li>
+  <li>24/11/26 <strong>Adam</strong> Updated the calculations and fixed it, but needs more fixing</li>
   </ul>
 </div>
 <div class="to do next">
