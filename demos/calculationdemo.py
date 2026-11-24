@@ -1,6 +1,5 @@
 # This is the calculation I made to work in PYTHON
 #You can copy and paste to test
-#I dont trust you guys so ye, when I say you guys I mean only Idris
 #The only reason it MIGHT not work is because the lines are too long or trailing whitespace
 
 
