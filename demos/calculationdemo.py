@@ -63,7 +63,7 @@ ShortHaulPlaneAvSpeed = 850
 
 numcars = int(input("How many cars have you driven today?(Put 0 if none)"))
 
-if numcars < 0:
+while numcars < 0:
     print("Try Again")
     numcars = int(input("How many cars have you driven today?(Put 0 if none)"))
 
@@ -131,7 +131,7 @@ _____ = str(input("Did you go on Public transport today? (Yes or No)"))
 if _____ == "yes" or _____ == "YES" or _____ == "Yes":
     ___ = int(input("How many types of public transport did you go on today?"))
 
-    if ___ < 0:
+    while ___ < 0:
         print("Try Again")
         ___ = int(input("How many types of public transport did you go on today?"))
 
@@ -253,7 +253,7 @@ if answer == 1:
     if ansansanswer == 1:
         ansanswer = int(input("Please choose: Long Haul = 1, Short Haul = 2 (Long Haul is more than 3700km or 6-7 hours)"))
 
-        if ansanswer < 0 and ansanswer >=3:
+        while ansanswer < 0 and ansanswer >=3:
             print("Try Again")
             ansanswer = int(input("Please choose: Long Haul = 1, Short Haul = 2 (Long Haul is more than 3700km or 6-7 hours)"))
 
