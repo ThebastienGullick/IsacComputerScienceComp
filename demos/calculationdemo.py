@@ -246,8 +246,8 @@ if _____ == "yes" or _____ == "YES" or _____ == "Yes":
 #######################################
 ### Start of Plane/Flight Section
 
-answer = int(input("Did you go on a flight today?, Yes = 1 and No = 2"))
-if answer == 1:
+answer = int(input("Did you go on a flight today? (Yes or No)"))
+if answer == "YES or answer == "Yes" or answer =="yes":
     ansansanswer = int(input("How many?"))
 
     if ansansanswer == 1:
@@ -268,6 +268,10 @@ if answer == 1:
             distance = lengthoflightsecs * ShortHaulPlaneAvSpeed
             C02planes = distance / ShortHaulPlaneFE * ShortHaulPlaneEF
             totC02planes = C02planes
+            
+##########################################################################################################
+
+###########################################################################################################
 
     while answer > 0:
         ansanswer = int(input("Please choose: Long Haul = 1, Short Haul = 2 (Long Haul is more than 3700km or 6-7 hours)"))
