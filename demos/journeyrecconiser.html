@@ -1,5 +1,7 @@
 
 <!DOCTYPE html>
+<!-- Hello this is our html file for journey reconnising andveichale reconising combined you can test by going to the websites in main readme.md
+Mad ein hmtl and javascipt-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -46,11 +48,11 @@
     <h1>InControl</h1>
     <h2>Journey Tracker</h2>
 
-    <!-- Section 1 Tracking  -->
+    <!-- Section 1 whitch is the og Tracking part -->
   
 
     <p>
-        We use will use GPS to detect your speed , distance traveled and the legnth of your journey and use this data to hlep us predict your carbon emissions!!!
+        We use will use GPS to detect your speed , distance traveled and the legnth of your journey and use this data to hlep us predict your carbon emissions!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       <br> 
       This is a demo for that!
     </p>
@@ -66,7 +68,7 @@
 
     <br><br>
 
-    <!-- to turn on the gps tracking -->
+    <!-- to turn on the gps tracking this is he button  -->
     <button id="trackButton" onclick="toggleTracking()">Start</button>
 
     <hr>
@@ -75,7 +77,7 @@
         Tracking
     </h3>
 
-    <!-- this here will be the current gps data we r getting -->
+    <!-- this here will be the current gps data we r getting and set og scores -->
     <h3>Current Location</h3>
     <p id="location">Not tracking</p>
 
@@ -87,7 +89,7 @@
 
     <hr>
 
-    <!-- current journey imformation if there is one -->
+    <!-- setting data before tracking than current data -->
     <h3>
         <i class="fa-solid fa-route" style="color: rgb(116, 192, 252);"></i>
         Current Journey
@@ -135,7 +137,7 @@
         function startTracking() {
 
             if (!navigator.geolocation) {
-                alert("GPS is not supported by your browser.");
+                alert("GPS is not supported by  browser get new one.");
                 return;
             }
 
