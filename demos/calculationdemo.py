@@ -247,7 +247,7 @@ if _____ == "yes" or _____ == "YES" or _____ == "Yes":
 ### Start of Plane/Flight Section
 
 answer = int(input("Did you go on a flight today? (Yes or No)"))
-if answer == "YES or answer == "Yes" or answer =="yes":
+if answer == "YES" or answer == "Yes" or answer =="yes":
     ansansanswer = int(input("How many?"))
 
     if ansansanswer == 1:
