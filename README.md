@@ -1,6 +1,6 @@
 <h1>The Internet Of Everything Entry</h1>
 <br>
-<h1>NO AI</h1>
+<h1>NO AI (except pictures)</h1>
 <br>
 <div class="header">
   <h2>Our Project</h2>
