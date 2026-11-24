@@ -67,7 +67,10 @@ while numcars < 0:
     print("Try Again")
     numcars = int(input("How many cars have you driven today?(Put 0 if none)"))
 
-if numcars > 0:
+if numcars == 0:
+    totC02carnocar = 0
+
+if numcars >= 1:
     print(" Electric = 1, Petrol = 2, Diesel = 3")
     cartype = int(input("Please enter the number for your car type"))
 
@@ -86,10 +89,6 @@ if numcars > 0:
         C02carnocars = distance / DieselCarFE * DieselCarEF
         totC02carnocar = C02carnocars
 
-    else:
-        print("Please input a valid number")
-        print(" Electric = 1, Petrol = 2, Diesel = 3")
-        cartype = int(input("Please enter the number for your car type"))
 
     numcars = numcars - 1
 
@@ -101,33 +100,37 @@ if numcars > 0:
 ###Loop for number of cars###
 #####
 
-while numcars > 0:
-    print(" Electric = 1, Petrol = 2, Diesel = 3")
-    cartype = int(input("Please enter the number for your car type"))
+    while numcars > 0:
+        print(" Electric = 1, Petrol = 2, Diesel = 3")
+        cartype = int(input("Please enter the number for your car type"))
+    
+        if cartype == 1:
+            distance = int(input("How far did you drive today, in km(Include time in traffic), you can estimate"))
+            C02carnocars = distance / ElectricCarFE * ElectricCarEF
+            totC02carnocar = C02carnocars + totC02carnocar
+    
+        elif cartype == 2:
+            distance = int(input("How far did you drive today, in km(Include time in traffic), you can estimate"))
+            C02carnocars = distance / PetrolCarFE * PetrolCarEF
+            totC02carnocar = C02carnocars + totC02carnocar
+    
+        elif cartype == 3:
+            distance = int(input("How far did you drive today, in km?(Include time in traffic), you can estimate"))
+            C02carnocars = distance / DieselCarFE * DieselCarEF
+            totC02carnocar = C02carnocars + totC02carnocar
+    
+        numcars = numcars - 1
 
-    if cartype == 1:
-        distance = int(input("How far did you drive today, in km(Include time in traffic), you can estimate"))
-        C02carnocars = distance / ElectricCarFE * ElectricCarEF
-        totC02carnocar = C02carnocars + totC02carnocar
-
-    elif cartype == 2:
-        distance = int(input("How far did you drive today, in km(Include time in traffic), you can estimate"))
-        C02carnocars = distance / PetrolCarFE * PetrolCarEF
-        totC02carnocar = C02carnocars + totC02carnocar
-
-    elif cartype == 3:
-        distance = int(input("How far did you drive today, in km?(Include time in traffic), you can estimate"))
-        C02carnocars = distance / DieselCarFE * DieselCarEF
-        totC02carnocar = C02carnocars + totC02carnocar
-
-    numcars = numcars - 1
+    print("Your Carbon Emissions for your cars are", totC02carnocar, "kgC02e")
+else:
+       print("Your Carbon Emissions for your cars are 0 kgCO2e")
 
 ##########################
 ### END OF CAR SECTION ###
 ##########################
 ### Now starting Public Transport Section
 
-_____ = str(input("Did you go on Public transport today? (Yes or No)"))
+_____ = str(input("\nDid you go on Public transport today? (Yes or No)"))
 if _____ == "yes" or _____ == "YES" or _____ == "Yes":
     ___ = int(input("How many types of public transport did you go on today?"))
 
@@ -191,63 +194,66 @@ if _____ == "yes" or _____ == "YES" or _____ == "Yes":
 
 ########################################################################################
 
-    while ___ > 0:
-        print("Train = 1, Bus = 2, Coaches = 3, Trolley Buses = 4, Taxis = 5, Trams = 6, Ferries = 7, Cable Cars = 8")
-        typeofpt = int(input("Please choose the number, you will need to choose 1 first, then you can choose others after you have filled in your informtion about a single one"))
-
-        #####
-        ### I copy and pasted this part though :)
-        #####
-
-        if typeofpt == 1:
-            distance = int(input("How far did you travel today, in km?, you can estimate"))
-            C02nopt = distance / TrainsFE * TrainsEF
-            totC02pt = C02nopt + totC02pt
-
-        elif typeofpt == 2:
-            distance = int(input("How far did you travel today, in km?, you can estimate"))
-            C02nopt = distance / BussesFE * BussesEF
-            totC02pt = C02nopt + totC02pt
-
-        elif typeofpt == 3:
-            distance = int(input("How far did you travel today, in km?, you can estimate"))
-            C02nopt = distance / CoachesFE * CoachesEF
-            totC02pt = C02nopt + totC02pt
-
-        elif typeofpt == 4:
-            distance = int(input("How far did you travel today, in km?, you can estimate"))
-            C02nopt = distance / TrolleyBusesFE * TrolleyBusesEF
-            totC02pt = C02nopt + totC02pt
-
-        elif typeofpt == 5:
-            distance = int(input("How far did you travel today, in km?, you can estimate"))
-            C02nopt = distance / TaxisFE * TaxisEF
-            totC02pt = C02nopt + totC02pt
-
-        elif typeofpt == 6:
-            distance = int(input("How far did you travel today, in km?, you can estimate"))
-            C02nopt = distance / TramsFE * TramsEF
-            totC02pt = C02nopt + totC02pt
-
-        elif typeofpt == 7:
-            distance = int(input("How far did you travel today, in km?, you can estimate"))
-            C02nopt = distance / FerriesFE * FerriesEF
-            totC02pt = C02nopt + totC02pt
-
-        elif typeofpt == 8:
-            distance = int(input("How far did you travel today, in km?, you can estimate"))
-            C02nopt = distance / CableCarsFE * CableCarsEF
-            totC02pt = C02nopt + totC02pt
-
-        typeofpt = typeofpt - 1
+        while ___ > 0:
+            print("Train = 1, Bus = 2, Coaches = 3, Trolley Buses = 4, Taxis = 5, Trams = 6, Ferries = 7, Cable Cars = 8")
+            typeofpt = int(input("Please choose the number, you will need to choose 1 first, then you can choose others after you have filled in your informtion about a single one"))
+    
+            #####
+            ### I copy and pasted this part though :)
+            #####
+    
+            if typeofpt == 1:
+                distance = int(input("How far did you travel today, in km?, you can estimate"))
+                C02nopt = distance / TrainsFE * TrainsEF
+                totC02pt = C02nopt + totC02pt
+    
+            elif typeofpt == 2:
+                distance = int(input("How far did you travel today, in km?, you can estimate"))
+                C02nopt = distance / BussesFE * BussesEF
+                totC02pt = C02nopt + totC02pt
+    
+            elif typeofpt == 3:
+                distance = int(input("How far did you travel today, in km?, you can estimate"))
+                C02nopt = distance / CoachesFE * CoachesEF
+                totC02pt = C02nopt + totC02pt
+    
+            elif typeofpt == 4:
+                distance = int(input("How far did you travel today, in km?, you can estimate"))
+                C02nopt = distance / TrolleyBusesFE * TrolleyBusesEF
+                totC02pt = C02nopt + totC02pt
+    
+            elif typeofpt == 5:
+                distance = int(input("How far did you travel today, in km?, you can estimate"))
+                C02nopt = distance / TaxisFE * TaxisEF
+                totC02pt = C02nopt + totC02pt
+    
+            elif typeofpt == 6:
+                distance = int(input("How far did you travel today, in km?, you can estimate"))
+                C02nopt = distance / TramsFE * TramsEF
+                totC02pt = C02nopt + totC02pt
+    
+            elif typeofpt == 7:
+                distance = int(input("How far did you travel today, in km?, you can estimate"))
+                C02nopt = distance / FerriesFE * FerriesEF
+                totC02pt = C02nopt + totC02pt
+    
+            elif typeofpt == 8:
+                distance = int(input("How far did you travel today, in km?, you can estimate"))
+                C02nopt = distance / CableCarsFE * CableCarsEF
+                totC02pt = C02nopt + totC02pt
+    
+            typeofpt = typeofpt - 1
+else:
+    totC02pt = 0
+    print("Your total Carbon Emissions for your public transport are", totC02pt, "kgCO2e")
 
 #######################################
 ### END OF PUBLIC TRANSPORT SECTION ###
 #######################################
 ### Start of Plane/Flight Section
 
-answer = int(input("Did you go on a flight today? (Yes or No)"))
-if answer == "YES" or answer == "Yes" or answer =="yes":
+answer = str(input("\nDid you go on a flight today? (Yes or No)"))
+if answer == "YES or answer" == "Yes" or answer =="yes":
     ansansanswer = int(input("How many?"))
 
     if ansansanswer == 1:
@@ -264,6 +270,7 @@ if answer == "YES" or answer == "Yes" or answer =="yes":
             C02planes = distance / LongHaulPlaneFE * LongHaulPlaneEF
             totC02planes = C02planes
         if ansanswer == 2:
+            flightlength = int(input("How long (in hours), you can estimate"))
             lengthoflightsecs = flightlength * 3600
             distance = lengthoflightsecs * ShortHaulPlaneAvSpeed
             C02planes = distance / ShortHaulPlaneFE * ShortHaulPlaneEF
@@ -273,31 +280,36 @@ if answer == "YES" or answer == "Yes" or answer =="yes":
 
 ###########################################################################################################
 
-    while answer > 0:
-        ansanswer = int(input("Please choose: Long Haul = 1, Short Haul = 2 (Long Haul is more than 3700km or 6-7 hours)"))
-
-        if ansanswer < 0 and ansanswer >=3:
-            print("Try Again")
+        while ansansanswer > 0:
             ansanswer = int(input("Please choose: Long Haul = 1, Short Haul = 2 (Long Haul is more than 3700km or 6-7 hours)"))
-
-        if ansanswer == 1:
-            flightlength = int(input("How long (in hours), you can estimate"))
-            lengthoflightsecs = flightlength * 3600
-            distance = lengthoflightsecs * LongHaulPlaneAvSpeed
-            C02planes = distance / LongHaulPlaneFE * LongHaulPlaneEF
-            totC02planes = C02planes + totC02planes
-
-        if ansanswer == 2:
-            lengthoflightsecs = flightlength * 3600
-            distance = lengthoflightsecs * ShortHaulPlaneAvSpeed
-            C02planes = distance / ShortHaulPlaneFE * ShortHaulPlaneEF
-            totC02planes = C02planes + totC02planes
-
-        ansanswer = ansanswer - 1
-
+    
+            if ansanswer < 0 and ansanswer >=3:
+                print("Try Again")
+                ansanswer = int(input("Please choose: Long Haul = 1, Short Haul = 2 (Long Haul is more than 3700km or 6-7 hours)"))
+    
+            if ansanswer == 1:
+                flightlength = int(input("How long (in hours), you can estimate"))
+                lengthoflightsecs = flightlength * 3600
+                distance = lengthoflightsecs * LongHaulPlaneAvSpeed
+                C02planes = distance / LongHaulPlaneFE * LongHaulPlaneEF
+                totC02planes = C02planes + totC02planes
+    
+            if ansanswer == 2:
+                flightlength = int(input("How long (in hours), you can estimate"))
+                lengthoflightsecs = flightlength * 3600
+                distance = lengthoflightsecs * ShortHaulPlaneAvSpeed
+                C02planes = distance / ShortHaulPlaneFE * ShortHaulPlaneEF
+                totC02planes = C02planes + totC02planes
+    
+            ansanswer = ansanswer - 1
+else:
+    totC02planes = 0
+    print("Your total Carbon Emissions for your plane rides are", totC02planes, "kgCO2e")
+    
+print("\nIn Conclusion:")
 print("Your Carbon Emissions for your cars are", totC02carnocar, "kgCO2e")
 print("Your total Carbon Emissions for your public transport are", totC02pt, "kgCO2e")
 print("Your total Carbon Emissions for your plane rides are", totC02planes, "kgCO2e")
-
+    
 totaltoday = totC02planes + totC02pt + totC02carnocar
-print("Your total Carbon Emissions today are", totaltoday)
+print("\nYour total Carbon Emissions today are", totaltoday)
