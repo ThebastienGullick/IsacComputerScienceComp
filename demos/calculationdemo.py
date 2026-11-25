@@ -97,9 +97,9 @@ def ask_distance_pt():
             value = float(input("\nHow far did you travel today, in km (include time in traffic), you can estimate   "   ))
             if value >= 0:
                 return value
-            except ValueError:
-                pass
-            print("Please enter a valid number   "   )
+        except ValueError:
+            pass
+        print("Please enter a valid number   "   )
 
 ############################################################################################
 # Define Function for planes
