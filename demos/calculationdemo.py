@@ -99,7 +99,7 @@ def ask_distance_pt():
                 return value
         except ValueError:
             pass
-        print("Please enter a valid number   "   )
+            print("Please enter a valid number   "   )
 
 ############################################################################################
 # Define Function for planes
@@ -108,7 +108,7 @@ def ask_distance_pt():
 def ask_planetype():
     while True:
         ansanswer = ask_int("Please enter the number for your type of plane ride   "   )
-        if ansasnwer in (1,2):
+        if ansanswer in (1,2):
             return ansanswer
         print("Please enter a valid number   "   )
         print("Please choose: Long Haul = 1, Short Haul = 2 (Long Haul is more than 3700km or 6-7 hours)   "   )
@@ -119,8 +119,8 @@ def ask_plane_distance():
             value = float(input("How long (in hours), you can estimate   "   ))
             if value >= 0:
                 return value
-            except ValueError:
-                pass
+        except ValueError:
+            pass
             print("Please enter a valid number   ")
 
 ############################################################################################
@@ -317,47 +317,48 @@ else:
 ### Plane/Flight Section
 #####################################################################################
 
-planeanswer = ask_int(input("\nHow many flights did you go on today? (Put 0 if you haven't)   "   ))
+numplanes = ask_int(input("\nHow many flights did you go on today? (Put 0 if you haven't)   "   ))
 totC02planes = 0
 
 
-    if numplanes >= 1:
-        print("Please choose: Long Haul = 1, Short Haul = 2 (Long Haul is more than 3700km or 6-7 hours)   ")
+if numplanes >= 1:
+    print("Please choose: Long Haul = 1, Short Haul = 2 (Long Haul is more than 3700km or 6-7 hours)   ")
+    ansanswer = ask_planetype()
 
-        if ansanswer == 1:
-            flightlength = ask_plane_distance()
-            distance = flightlength * LongHaulPlaneAvSpeed
-            C02planes = distance * LongHaulPlaneEF
-            totC02planes = C02planes
+    if ansanswer == 1:
+        flightlength = ask_plane_distance()
+        distance = flightlength * LongHaulPlaneAvSpeed
+        C02planes = distance * LongHaulPlaneEF
+        totC02planes = C02planes
 
 
-        if ansanswer == 2:
-            flightlength = ask_plane_distance()
-            distance = flightlength * ShortHaulPlaneAvSpeed
-            C02planes = distance * ShortHaulPlaneEF
-            totC02planes = C02planes
+    if ansanswer == 2:
+        flightlength = ask_plane_distance()
+        distance = flightlength * ShortHaulPlaneAvSpeed
+        C02planes = distance * ShortHaulPlaneEF
+        totC02planes = C02planes
             
 ##########################################################################################################
 
 ###########################################################################################################
 
-        while numplanes > 0:
-            print("Please choose: Long Haul = 1, Short Haul = 2 (Long Haul is more than 3700km or 6-7 hours)   ")
-            ansanswer = ask_planetype()
+    while numplanes > 0:
+        print("Please choose: Long Haul = 1, Short Haul = 2 (Long Haul is more than 3700km or 6-7 hours)   ")
+        ansanswer = ask_planetype()
     
     
-            if ansanswer == 1:
-                flightlength = ask_plane_distance()
-                distance = flightlength * LongHaulPlaneAvSpeed
-                C02planes = distance * LongHaulPlaneEF
-                totC02planes = C02planes + totC02planes
+        if ansanswer == 1:
+            flightlength = ask_plane_distance()
+            distance = flightlength * LongHaulPlaneAvSpeed
+            C02planes = distance * LongHaulPlaneEF
+            totC02planes = C02planes + totC02planes
     
 
-            if ansanswer == 2:
-                flightlength = ask_plane_distance()
-                distance = flightlength * ShortHaulPlaneAvSpeed
-                C02planes = distance * ShortHaulPlaneEF
-                totC02planes = C02planes + totC02planes
+        if ansanswer == 2:
+            flightlength = ask_plane_distance()
+            distance = flightlength * ShortHaulPlaneAvSpeed
+            C02planes = distance * ShortHaulPlaneEF
+            totC02planes = C02planes + totC02planes
     
             numplanes = numplanes - 1
 
@@ -382,3 +383,4 @@ totaltoday = totC02planes + totC02pt + totC02carnocar
 print("\nYour total Carbon Emissions today are", totaltoday)
 
 #25/11/26 I think I have finally finished it, if I haven't Ill be here later - Adam
+#26/11/26 Im back due to some minor erros in the code such as variable names and indentations that I was informed of by Leo - Adam
