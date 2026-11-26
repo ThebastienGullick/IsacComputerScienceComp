@@ -46,6 +46,7 @@
   <li>Create a chart to show daily/weekly/monthly/yearly co2 emissions so you can track your overall carbon footprint, gives people a target to beat</li>
   <li>Shows the average CO2 emissions per person so you can compare</li>
   <li>Create a power point to present our project - dw guys ill have it done by the end of this week</li>
+  <li>I just saw the large data base of cars in design and research.... Ill do my best guys - Adam</li>
 </ul>
 </div>
 <div class="Navigator">
